@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MusicApp_Project_APPDEV</string>
+    <string name="song_name">naam nummer</string>
+    <string name="song_album">Album naam</string>
+    <string name="song_duration">duur Nummer</string>
+    <string name="add_button">Toevoegen</string>
+    <string name="edit_button">verander</string>
+    <string name="delete_button">verwijder</string>
+
+    <string name="settingText">Kies je taal</string>
+    <string name="button_english">Engels</string>
+    <string name="button_dutch">Nederlands</string>
+    <string name="taalTextV">Taal:</string>
+    <string name="colorMode">Kleuren modus:</string>
+    <string name="fontMode">Text dikte:</string>
+    <string name="fontNormal">Nomraal</string>
+    <string name="fontBold">Bet</string>
+    <string name="colorLight">Licht</string>
+    <string name="colorDark">Donker</string>
+    <string name="languageEn">Engels</string>
+    <string name="languageNe">Nederlands</string>
+
+    <string name="textArtist">Artiest</string>
+    <string name="textDuration">Duur</string>
+    <string name="textAlbum">Album</string>
+    <string name="settingsKop">Instellingen</string>
+
+
+</resources>

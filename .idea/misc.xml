@@ -4,8 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Killi/OneDrive/Documenten/School/Fase 2/Semester 2/App Dev/Labos/MusicApp_Project_APPDEV/app/src/main/res/drawable/ic_add_music.xml" value="0.361" />
+        <entry key="..\:/Users/Killi/OneDrive/Documenten/School/Fase 2/Semester 2/App Dev/Labos/MusicApp_Project_APPDEV/app/src/main/res/layout-land/activity_add_music.xml" value="0.31040564373897706" />
+        <entry key="..\:/Users/Killi/OneDrive/Documenten/School/Fase 2/Semester 2/App Dev/Labos/MusicApp_Project_APPDEV/app/src/main/res/layout-land/activity_main.xml" value="0.31040564373897706" />
+        <entry key="..\:/Users/Killi/OneDrive/Documenten/School/Fase 2/Semester 2/App Dev/Labos/MusicApp_Project_APPDEV/app/src/main/res/layout-land/activity_settings.xml" value="0.31040564373897706" />
+        <entry key="..\:/Users/Killi/OneDrive/Documenten/School/Fase 2/Semester 2/App Dev/Labos/MusicApp_Project_APPDEV/app/src/main/res/layout-land/activity_update_song.xml" value="0.31040564373897706" />
+        <entry key="..\:/Users/Killi/OneDrive/Documenten/School/Fase 2/Semester 2/App Dev/Labos/MusicApp_Project_APPDEV/app/src/main/res/layout-land/recyclerview_row.xml" value="0.6671299513551077" />
         <entry key="..\:/Users/Killi/OneDrive/Documenten/School/Fase 2/Semester 2/App Dev/Labos/MusicApp_Project_APPDEV/app/src/main/res/layout/activity_add_music.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Killi/OneDrive/Documenten/School/Fase 2/Semester 2/App Dev/Labos/MusicApp_Project_APPDEV/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Killi/OneDrive/Documenten/School/Fase 2/Semester 2/App Dev/Labos/MusicApp_Project_APPDEV/app/src/main/res/layout/activity_settings.xml" value="0.33" />
+        <entry key="..\:/Users/Killi/OneDrive/Documenten/School/Fase 2/Semester 2/App Dev/Labos/MusicApp_Project_APPDEV/app/src/main/res/layout/activity_update_song.xml" value="0.25" />
+        <entry key="..\:/Users/Killi/OneDrive/Documenten/School/Fase 2/Semester 2/App Dev/Labos/MusicApp_Project_APPDEV/app/src/main/res/layout/recyclerview_row.xml" value="0.5302843016069221" />
+        <entry key="..\:/Users/Killi/OneDrive/Documenten/School/Fase 2/Semester 2/App Dev/Labos/MusicApp_Project_APPDEV/app/src/main/res/menu/menu_song.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

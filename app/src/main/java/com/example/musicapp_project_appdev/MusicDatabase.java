@@ -21,7 +21,7 @@ public class MusicDatabase extends SQLiteOpenHelper {
     private static final String COLUMN_ALBUM = "album_name";
     private static final String COLUMN_DURATION = "song_duration";
 
-    public MusicDatabase(@Nullable Context context) {
+    MusicDatabase(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
@@ -67,4 +67,32 @@ public class MusicDatabase extends SQLiteOpenHelper {
         }
         return  cursor;
     }
+
+    void updateData(String rowId, String name, String album, String duration){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_NAME, name);
+        cv.put(COLUMN_ALBUM, album);
+        cv.put(COLUMN_DURATION, duration);
+
+        long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{rowId});
+        if(result == -1){
+            Toast.makeText(context, "No data", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(context,"Edited "+name, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    void deleteSong(String rowId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(TABLE_NAME, "_id=?", new String[]{rowId});
+        if(result == -1){
+            Toast.makeText(context, "No data", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(context,"Deleted ", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

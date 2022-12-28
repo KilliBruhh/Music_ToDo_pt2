@@ -1,4 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <resources>
+
     <string name="app_name">MusicApp_Project_APPDEV</string>
     <string name="song_name">Song name</string>
     <string name="song_album">Song Album</string>
@@ -6,16 +9,12 @@
     <string name="add_button">Add</string>
     <string name="edit_button">Edit</string>
     <string name="delete_button">Delete</string>
-
-    <string name="settingsKop">Settings</string>
     <string name="settingText">Choose your languageu</string>
     <string name="button_english">English</string>
     <string name="button_dutch">Dutch</string>
-
     <string name="taalTextV">Language:</string>
     <string name="colorMode">Color mode:</string>
     <string name="fontMode">Font:</string>
-
     <string name="fontNormal">Normal</string>
     <string name="fontBold">Bold</string>
     <string name="colorLight">Light</string>
@@ -23,9 +22,9 @@
     <string name="languageEn">English</string>
     <string name="languageNe">Dutch</string>
 
-
     <string name="textArtist">Artist</string>
     <string name="textDuration">Duration</string>
     <string name="textAlbum">Album</string>
+    <string name="settingsKop">Settings</string>
 
 </resources>

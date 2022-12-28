@@ -1,12 +1,25 @@
 package com.example.musicapp_project_appdev;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -16,14 +29,28 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    FloatingActionButton addMusicButton;
+    FloatingActionButton addMusicButton, goToSettings;
     MusicDatabase db;
     ArrayList<String> songId, songName, songAlbum, songDuration;
-
+    CustomAdapter customAdapter;
+    Button b;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        // CHeck
+
+        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            // Is Dark
+            setTheme(R.style.Theme_Dark);
+        }else {
+            // is Light
+            setTheme((R.style.Theme_Light));
+        }
+
+
 
         recyclerView = findViewById(R.id.recyclerView);
         addMusicButton = findViewById(R.id.addMusicButton);
@@ -35,6 +62,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        goToSettings = findViewById(R.id.settingsButton);
+        goToSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Settings.class);
+                startActivity(intent);
+
+
+            }
+        });
+
         db = new MusicDatabase(MainActivity.this);
         songId = new ArrayList<>();
         songName = new ArrayList<>();
@@ -42,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
         songDuration = new ArrayList<>();
 
         savaData();
+
+        customAdapter = new CustomAdapter(MainActivity.this, songId, songName, songAlbum, songDuration);
+        recyclerView.setAdapter(customAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
     }
 
     void savaData() {
@@ -59,4 +101,39 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    // Content provider
+    public void onGetContact(View view) {
+        getContact();
+    }
+
+    // Getting the contact function
+    //First check if it is allwed --> ask for permission
+    private void getContact() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED)  {
+            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.READ_CONTACTS}, 0);
+        }
+
+        ContentResolver contentResolver = getContentResolver();
+        Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+        Cursor cursor = contentResolver.query(uri, null, null, null, null);
+
+        Log.i("CONTACT_PROVIDER_DEMO", "TOTAL # of Contacts: " + Integer.toString(cursor.getCount()));
+
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+               int contactName = cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
+               int contactNumber = cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER);
+
+
+
+                Log.i("CONTACT_PROVIDER_DEMO", "Contact Name: " + contactName + " ph# : "+ contactNumber);
+            }
+        }
+
+
+    }
+
+
+
 }

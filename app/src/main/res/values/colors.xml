@@ -7,4 +7,23 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#FF0404</color>
+
+    // Ocean colors
+    <color name="OceanDarkBlue">#345EA8</color>
+    <color name="OceanLightBlue">#3B8AC3</color>
+    <color name="OceanWaterBLue">#4AB4DE</color>
+    <color name="OceanCream">#EEDBCB</color>
+
+    // Moss Colors
+    <color name="MossDarkGreen">#016170</color>
+    <color name="MossGreen">#009393</color>
+    <color name="MossBlue">#00E0C6</color>
+    <color name="MossWhite">#FFFFF0</color>
+
+    // JAPAN Red + Wood
+    <color name="JapanRed">#B91343</color>
+    <color name="JapanWooed">#A8806B</color>
+
+
 </resources>

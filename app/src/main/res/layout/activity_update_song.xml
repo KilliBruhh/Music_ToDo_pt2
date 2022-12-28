@@ -7,7 +7,7 @@
     tools:context=".AddMusic">
 
     <EditText
-        android:id="@+id/songName"
+        android:id="@+id/EditSongName"
         android:layout_width="286dp"
         android:layout_height="48dp"
         android:layout_marginTop="168dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/AlbumName"
+        android:id="@+id/EditAlbumSong"
         android:layout_width="286dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
@@ -30,10 +30,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/songName" />
+        app:layout_constraintTop_toBottomOf="@+id/EditSongName" />
 
     <EditText
-        android:id="@+id/durationSong"
+        android:id="@+id/EditDurationSong"
         android:layout_width="286dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
@@ -43,17 +43,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AlbumName" />
+        app:layout_constraintTop_toBottomOf="@+id/EditAlbumSong" />
 
     <Button
-        android:id="@+id/addSongButton"
+        android:id="@+id/EditSongButton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/add_button"
+        android:layout_marginTop="40dp"
+        android:text="@string/edit_button"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/durationSong" />
+        app:layout_constraintTop_toBottomOf="@+id/EditDurationSong" />
+
+    <Button
+        android:id="@+id/DeleteSongButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/delete_button"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EditSongButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

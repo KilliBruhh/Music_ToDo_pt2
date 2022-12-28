@@ -2,6 +2,7 @@ package com.example.musicapp_project_appdev;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,7 @@ public class AddMusic extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_music);
 
+
         songName = findViewById(R.id.songName);
         albumName = findViewById(R.id.AlbumName);
         durationSong = findViewById(R.id.durationSong);
@@ -30,6 +32,10 @@ public class AddMusic extends AppCompatActivity {
                         songName.getText().toString().trim(),
                         albumName.getText().toString().trim(),
                         Integer.valueOf(durationSong.getText().toString().trim()));
+
+                    Intent intent = new Intent(AddMusic.this, MainActivity.class);
+                    startActivity(intent);
+
             }
         });
     }
