@@ -27,5 +27,9 @@
     <string name="textAlbum">Album</string>
     <string name="settingsKop">Instellingen</string>
 
+    <string name="nb_add">Voeg nummer toe</string>
+    <string name="nb_Home">Start</string>
+    <string name="nb_Settings">Instellingen</string>
+
 
 </resources>

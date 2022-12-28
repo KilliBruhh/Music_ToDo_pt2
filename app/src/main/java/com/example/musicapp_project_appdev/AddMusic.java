@@ -4,15 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class AddMusic extends AppCompatActivity {
 
     EditText songName, albumName, durationSong;
     Button addSongButton;
-
+    BottomNavigationView navBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,29 @@ public class AddMusic extends AppCompatActivity {
                     Intent intent = new Intent(AddMusic.this, MainActivity.class);
                     startActivity(intent);
 
+            }
+        });
+
+        // Navigation
+        navBar = findViewById(R.id.bottom_navigation);
+        navBar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.goHome:
+                        Intent intentHome = new Intent(AddMusic.this, MainActivity.class);
+                        startActivity(intentHome);
+                        break;
+                    case R.id.goSettings:
+                        Intent intentSettings = new Intent(AddMusic.this, Settings.class);
+                        startActivity(intentSettings);
+                        break;
+                    case R.id.goAddSong:
+                        Intent intentAddSong = new Intent(AddMusic.this, AddMusic.class);
+                        startActivity(intentAddSong);
+                        break;
+                }
+                return false;
             }
         });
     }
