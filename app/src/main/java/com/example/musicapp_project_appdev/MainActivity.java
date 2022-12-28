@@ -1,5 +1,6 @@
 package com.example.musicapp_project_appdev;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
@@ -18,11 +19,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     MusicDatabase db;
     ArrayList<String> songId, songName, songAlbum, songDuration;
     CustomAdapter customAdapter;
+    BottomNavigationView navBar;
     Button b;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,31 @@ public class MainActivity extends AppCompatActivity {
 
 
         recyclerView = findViewById(R.id.recyclerView);
+
+        // Navigation
+        navBar = findViewById(R.id.bottom_navigation);
+        navBar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.goHome:
+                        Intent intentHome = new Intent(MainActivity.this, MainActivity.class);
+                        startActivity(intentHome);
+                        break;
+                    case R.id.goSettings:
+                        Intent intentSettings = new Intent(MainActivity.this, Settings.class);
+                        startActivity(intentSettings);
+                        break;
+                    case R.id.goAddSong:
+                        Intent intentAddSong = new Intent(MainActivity.this, AddMusic.class);
+                        startActivity(intentAddSong);
+                        break;
+                }
+                return false;
+            }
+        });
+
+        /*
         addMusicButton = findViewById(R.id.addMusicButton);
         addMusicButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
 
         goToSettings = findViewById(R.id.settingsButton);
         goToSettings.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +104,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        */
+
 
         db = new MusicDatabase(MainActivity.this);
         songId = new ArrayList<>();

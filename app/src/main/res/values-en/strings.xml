@@ -27,4 +27,9 @@
     <string name="textAlbum">Album</string>
     <string name="settingsKop">Settings</string>
 
+    <string name="nb_add">Add Song</string>
+    <string name="nb_Home">Home</string>
+    <string name="nb_Settings">Settings</string>
+
+
 </resources>

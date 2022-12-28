@@ -7,15 +7,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+
 public class UpdateSong extends AppCompatActivity {
 
     EditText songName, songAlbum, songDuration;
     Button editButton, deleteButton;
+    BottomNavigationView navBar;
 
     String id, name, album, duration;
 
@@ -54,6 +59,29 @@ public class UpdateSong extends AppCompatActivity {
                 confirmDelete();
             }
         });
+
+        navBar = findViewById(R.id.bottom_navigation);
+        navBar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.goHome:
+                        Intent intentHome = new Intent(UpdateSong.this, MainActivity.class);
+                        startActivity(intentHome);
+                        break;
+                    case R.id.goSettings:
+                        Intent intentSettings = new Intent(UpdateSong.this, Settings.class);
+                        startActivity(intentSettings);
+                        break;
+                    case R.id.goAddSong:
+                        Intent intentAddSong = new Intent(UpdateSong.this, AddMusic.class);
+                        startActivity(intentAddSong);
+                        break;
+                }
+                return false;
+            }
+        });
+
     }
 
     void getChosenSongsData(){

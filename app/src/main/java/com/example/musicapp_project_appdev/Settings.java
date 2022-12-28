@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
@@ -14,9 +15,18 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+
 import java.util.Locale;
 
+
+
 public class Settings extends AppCompatActivity {
+
+    BottomNavigationView navBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +75,29 @@ public class Settings extends AppCompatActivity {
                 }
             }
         }));
+
+        // Navigation
+        navBar = findViewById(R.id.bottom_navigation);
+        navBar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.goHome:
+                        Intent intentHome = new Intent(Settings.this, MainActivity.class);
+                        startActivity(intentHome);
+                        break;
+                    case R.id.goSettings:
+                        Intent intentSettings = new Intent(Settings.this, Settings.class);
+                        startActivity(intentSettings);
+                        break;
+                    case R.id.goAddSong:
+                        Intent intentAddSong = new Intent(Settings.this, AddMusic.class);
+                        startActivity(intentAddSong);
+                        break;
+                }
+                return false;
+            }
+        });
 
 
         // Switch for theme mode
