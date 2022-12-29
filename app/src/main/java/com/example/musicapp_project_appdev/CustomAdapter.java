@@ -3,6 +3,7 @@ package com.example.musicapp_project_appdev;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
@@ -21,6 +24,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     private Context context;
     private ArrayList songNameRV, songAlbumRV, songIdRV, songDurationRV;
+    FloatingActionButton fabG;
 
 
     CustomAdapter(Context context, ArrayList songIdRV, ArrayList songNameRV, ArrayList songAlbumRV, ArrayList songDurationRV) {
@@ -36,6 +40,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.recyclerview_row, parent, false);
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.editButton);
+        fabG = fab;
+
         return new MyViewHolder(view);
     }
 
@@ -45,9 +52,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.songNameRV.setText(String.valueOf(songNameRV.get(position)));
         holder.songAlbumRV.setText(String.valueOf(songAlbumRV.get(position)));
         holder.songDurationRV.setText(String.valueOf(songDurationRV.get(position)));
-        holder.rowLayout.setOnClickListener(new View.OnClickListener() {
+
+        fabG.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.i("FLOATING CLICKED", "Floating button has been clicked");
                 Intent intent  = new Intent(context, UpdateSong.class);
                 intent.putExtra("id", String.valueOf(songIdRV.get(position)));
                 intent.putExtra("name", String.valueOf(songNameRV.get(position)));
@@ -56,7 +65,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 context.startActivity(intent);
             }
         });
+
+        /*
+        holder.rowLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        */
     }
+
+
 
     @Override
     public int getItemCount() {
