@@ -31,5 +31,13 @@
     <string name="nb_Home">Home</string>
     <string name="nb_Settings">Settings</string>
 
+    <string name="floatingButDesc">floating edit</string>
+
+    <string name="discId">Id</string>
+    <string name="discSong">Song</string>
+    <string name="discAlbum">Album</string>
+    <string name="discDuration">Duration</string>
+
+
 
 </resources>
