@@ -31,5 +31,10 @@
     <string name="nb_Home">Start</string>
     <string name="nb_Settings">Instellingen</string>
 
+    <string name="floatingButDesc">floating aanpassen</string>
 
+    <string name="discId">Id</string>
+    <string name="discSong">nummer</string>
+    <string name="discAlbum">Album</string>
+    <string name="discDuration">Duur</string>
 </resources>
