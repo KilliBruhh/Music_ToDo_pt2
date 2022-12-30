@@ -1,5 +1,6 @@
 package com.example.musicapp_project_appdev;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -14,17 +15,26 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class Contacts extends AppCompatActivity {
 
     TextView nameField, phoneField;
-
+    ListView lv;
+    static ArrayList<String> contactNumbers, contactNames;
+    int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
     }
 
@@ -59,20 +69,23 @@ public class Contacts extends AppCompatActivity {
 
 
 
-
-
                 Log.i("CONTACT_PROVIDER_DEMO", "Contact Name: " + contactName + " ph# : "+ contactNumber);
 
                 nameField = findViewById(R.id.contactName);
                 phoneField = findViewById(R.id.contactPhone);
 
-                nameField.setText(contactName);
-                phoneField.setText(contactNumber);
+                nameField.append(contactName);
+                nameField.append("\n");
+                phoneField.append(contactNumber);
+                phoneField.append("\n");
+
+                counter++;
+
 
 
             }
         }
 
-
     }
+
 }
