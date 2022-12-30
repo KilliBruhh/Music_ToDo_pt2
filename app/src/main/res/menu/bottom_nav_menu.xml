@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:id="@+id/goAddSong"
         android:title="@string/nb_add"
@@ -13,4 +12,5 @@
         android:id="@+id/goSettings"
         android:title="@string/nb_Settings"
         android:icon="@drawable/ic_baseline_settings_24" />
+
 </menu>

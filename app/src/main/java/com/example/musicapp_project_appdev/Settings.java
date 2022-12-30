@@ -26,6 +26,7 @@ import java.util.Locale;
 public class Settings extends AppCompatActivity {
 
     BottomNavigationView navBar;
+    Button goCp, goContacts;
 
 
     @Override
@@ -144,6 +145,17 @@ public class Settings extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        goContacts = findViewById(R.id.gotoContacts);
+        goContacts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Settings.this, Contacts.class);
+                startActivity(intent);
+            }
+        });
+
+
 
 
     }

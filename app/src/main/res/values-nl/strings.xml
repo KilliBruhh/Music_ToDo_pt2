@@ -30,6 +30,7 @@
     <string name="nb_add">Voeg nummer toe</string>
     <string name="nb_Home">Start</string>
     <string name="nb_Settings">Instellingen</string>
+    <string name="nb_Misc">Extra</string>
 
     <string name="floatingButDesc">floating edit</string>
 

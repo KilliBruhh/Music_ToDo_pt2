@@ -30,6 +30,8 @@
     <string name="nb_add">Add Song</string>
     <string name="nb_Home">Home</string>
     <string name="nb_Settings">Settings</string>
+    <string name="nb_Misc">Misc</string>
+
 
     <string name="floatingButDesc">floating edit</string>
 
