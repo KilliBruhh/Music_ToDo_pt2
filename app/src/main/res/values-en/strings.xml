@@ -33,13 +33,14 @@
     <string name="nb_Misc">Misc</string>
 
 
+
     <string name="floatingButDesc">floating edit</string>
+
 
     <string name="discId">Id</string>
     <string name="discSong">Song</string>
     <string name="discAlbum">Album</string>
     <string name="discDuration">Duration</string>
-
 
 
 </resources>

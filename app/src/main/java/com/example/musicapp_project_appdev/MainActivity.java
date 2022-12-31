@@ -34,12 +34,15 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    FloatingActionButton addMusicButton, goToSettings;
+
     MusicDatabase db;
     ArrayList<String> songId, songName, songAlbum, songDuration;
     CustomAdapter customAdapter;
     BottomNavigationView navBar;
     Button b;
+
+    public FloatingActionButton fab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +51,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        // CHeck
-
+        // CHeck Themes
         if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
             // Is Dark
             setTheme(R.style.Theme_Dark);
@@ -84,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
 
         db = new MusicDatabase(MainActivity.this);
         songId = new ArrayList<>();
