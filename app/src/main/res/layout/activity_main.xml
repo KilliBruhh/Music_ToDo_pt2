@@ -60,7 +60,7 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="00dp"
-        app:layout_constraintBottom_toTopOf="@+id/getContacts"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -74,41 +74,13 @@
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-    <!--
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addMusicButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="76dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.092"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_add_music"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/settingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="76dp"
-        android:clickable="true"
-        android:contentDescription="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.883"
-        app:layout_constraintStart_toEndOf="@+id/addMusicButton"
-        app:srcCompat="@drawable/ic_baseline_build_24" />
--->
 
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -127,17 +99,7 @@
 
     </TextView>
 
-    <Button
-        android:id="@+id/getContacts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="84dp"
-        android:onClick="onGetContact"
-        android:text="Contects"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

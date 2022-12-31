@@ -87,35 +87,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-        /*
-        addMusicButton = findViewById(R.id.addMusicButton);
-        addMusicButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddMusic.class);
-                startActivity(intent);
-            }
-        });
-
-
-
-        goToSettings = findViewById(R.id.settingsButton);
-        goToSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Settings.class);
-                startActivity(intent);
-
-
-            }
-        });
-
-        */
-
-
         db = new MusicDatabase(MainActivity.this);
         songId = new ArrayList<>();
         songName = new ArrayList<>();
@@ -145,37 +116,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Content provider
-    public void onGetContact(View view) {
-        getContact();
-    }
 
-    // Getting the contact function
-    //First check if it is allwed --> ask for permission
-    private void getContact() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED)  {
-            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.READ_CONTACTS}, 0);
-        }
-
-        ContentResolver contentResolver = getContentResolver();
-        Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
-        Cursor cursor = contentResolver.query(uri, null, null, null, null);
-
-        Log.i("CONTACT_PROVIDER_DEMO", "TOTAL # of Contacts: " + Integer.toString(cursor.getCount()));
-
-        if (cursor.getCount() > 0) {
-            while (cursor.moveToNext()) {
-               int contactName = cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
-               int contactNumber = cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER);
-
-
-
-                Log.i("CONTACT_PROVIDER_DEMO", "Contact Name: " + contactName + " ph# : "+ contactNumber);
-            }
-        }
-
-
-    }
 
 
 

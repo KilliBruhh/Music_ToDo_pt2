@@ -15,10 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Light">
         <activity
+            android:name=".Contacts"
+            android:exported="false" />
+        <activity
             android:name=".Settings"
-            android:label="Settings Songapp"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:label="Settings Songapp"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".UpdateSong"
             android:exported="false"
@@ -30,9 +33,10 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
