@@ -20,7 +20,6 @@
         <activity
             android:name=".Settings"
             android:exported="false"
-            android:label="Settings Songapp"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".UpdateSong"

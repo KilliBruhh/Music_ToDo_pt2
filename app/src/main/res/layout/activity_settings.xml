@@ -11,8 +11,8 @@
 
     <TextView
         android:id="@+id/settingsKop"
-        android:layout_width="243dp"
-        android:layout_height="68dp"
+        android:layout_width="310dp"
+        android:layout_height="64dp"
         android:layout_marginTop="32dp"
         android:gravity="center"
         android:text="@string/settingsKop"
@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+   <TextView
         android:id="@+id/taalTextview"
         android:layout_width="104dp"
         android:layout_height="wrap_content"
@@ -33,36 +33,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Switch
-        android:id="@+id/taalSwitch"
-        android:layout_width="66dp"
-        android:layout_height="76dp"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="36dp"
-        android:scaleX="2"
-        android:scaleY="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
-        app:layout_constraintStart_toEndOf="@+id/taalTextview"
-        app:layout_constraintTop_toBottomOf="@+id/settingsKop" />
-
-    <Switch
         android:id="@+id/kleurSwitch"
-        android:layout_width="66dp"
-        android:layout_height="76dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="59dp"
+        android:layout_height="46dp"
         android:scaleX="2"
         android:scaleY="2"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.549"
-        app:layout_constraintStart_toEndOf="@+id/modeTextView"
-        app:layout_constraintTop_toBottomOf="@+id/taalSwitch" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modeTextView" />
 
     <TextView
         android:id="@+id/modeTextView"
         android:layout_width="118dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="144dp"
         android:text="@string/colorMode"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,41 +58,23 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginBottom="208dp"
         android:text="@string/colorLight"
-        app:layout_constraintStart_toEndOf="@+id/modeTextView"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="60dp"
-        android:text="@string/languageNe"
-        app:layout_constraintStart_toEndOf="@+id/taalTextview"
-        app:layout_constraintTop_toBottomOf="@+id/settingsKop" />
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toStartOf="@+id/kleurSwitch"
+        app:layout_constraintHorizontal_bias="0.468"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="208dp"
         android:text="@string/colorDark"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="12dp"
-        android:text="@string/languageEn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsKop" />
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toEndOf="@+id/kleurSwitch" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -118,6 +86,7 @@
         app:menu="@menu/bottom_nav_menu" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="52dp"
@@ -128,24 +97,34 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/gotoContacts"
-            android:layout_margin="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Contacts" />
-
-        <Button
             android:id="@+id/settingsBackButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="Back" />
 
-        <Button
-            android:id="@+id/goToCP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="Song List" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/englishButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/englishButton"
+        app:layout_constraintBottom_toTopOf="@+id/modeTextView"
+        app:layout_constraintHorizontal_bias="0.339"
+        app:layout_constraintStart_toEndOf="@+id/taalTextview"
+        app:layout_constraintTop_toBottomOf="@+id/settingsKop"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/dutchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="28dp"
+        android:text="@string/dutchButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsKop" />
 </androidx.constraintlayout.widget.ConstraintLayout>

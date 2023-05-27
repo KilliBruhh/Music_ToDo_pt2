@@ -32,6 +32,8 @@
     <string name="nb_Settings">Settings</string>
     <string name="nb_Misc">Misc</string>
 
+    <string name="englishButton">English</string>
+    <string name="dutchButton">Dutch</string>
 
 
     <string name="floatingButDesc">floating edit</string>
@@ -41,6 +43,9 @@
     <string name="discSong">Song</string>
     <string name="discAlbum">Album</string>
     <string name="discDuration">Duration</string>
+
+    <string name="listTitle">Your SOngs to Listen to!</string>
+
 
 
 </resources>

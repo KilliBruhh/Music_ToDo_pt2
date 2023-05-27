@@ -38,4 +38,11 @@
     <string name="discSong">nummer</string>
     <string name="discAlbum">Album</string>
     <string name="discDuration">Duur</string>
+
+    <string name="englishButton">Engels</string>
+    <string name="dutchButton">Nederlands</string>
+
+    <string name="listTitle">Je Nummers die je wilt beluisteren!</string>
+
+
 </resources>

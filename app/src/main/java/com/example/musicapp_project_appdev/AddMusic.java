@@ -31,7 +31,6 @@ public class AddMusic extends AppCompatActivity {
         addSongButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MusicDatabase db = new MusicDatabase(AddMusic.this);
                 db.addMusicToDatabase(
                         songName.getText().toString().trim(),
                         albumName.getText().toString().trim(),
@@ -41,6 +40,7 @@ public class AddMusic extends AppCompatActivity {
                     startActivity(intent);
 
             }
+            MusicDatabase db = new MusicDatabase(AddMusic.this);
         });
 
         // Navigation

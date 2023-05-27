@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_rounded"
         android:padding="12dp"
-        android:text="Your Song To Listen List!"
+        android:text="@string/listTitle"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="16dp"

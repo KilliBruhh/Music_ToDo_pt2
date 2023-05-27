@@ -40,4 +40,10 @@
     <string name="discAlbum">Album</string>
     <string name="discDuration">Duration</string>
 
+    <string name="englishButton">English</string>
+    <string name="dutchButton">Dutch</string>
+
+    <string name="listTitle">Your SOngs to Listen to!</string>
+
+
 </resources>

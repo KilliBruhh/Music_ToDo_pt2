@@ -25,5 +25,6 @@
 - it also checks navigation and checks if the fields are filled in correctly when u want to edit
 - **!!!!! ATTENTION !!!!!**
 - Make shure there are no songs in your list (home) else it will test false.
+- ![testSucces](img/Screenshot_1.png)
 
 

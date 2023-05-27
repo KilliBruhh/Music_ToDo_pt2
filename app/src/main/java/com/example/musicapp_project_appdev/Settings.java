@@ -47,35 +47,27 @@ public class Settings extends AppCompatActivity {
         Switch lanSwitch, modeSwitch;
 
         // Switch for Language
-        lanSwitch = findViewById(R.id.taalSwitch);
-
-        setTheme(R.style.Theme_Light);
-
-
-
-        SharedPreferences sp = getSharedPreferences("save", MODE_PRIVATE);
-
-        lanSwitch.setChecked(sp.getBoolean("value", false));
-
-        lanSwitch.setOnClickListener((new View.OnClickListener() {
+        Button engbutton = findViewById(R.id.englishButton);
+        Button nlbutton = findViewById(R.id.dutchButton);
+        engbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (lanSwitch.isChecked()) {
-                    SharedPreferences.Editor editor = getSharedPreferences("save", MODE_PRIVATE).edit();
-                    editor.putBoolean("value", true);
-                    editor.apply();
-                    lanSwitch.setChecked(true);
-                    setLocale("en");
-                }
-                else {
-                    SharedPreferences.Editor editor = getSharedPreferences("save", MODE_PRIVATE).edit();
-                    editor.putBoolean("value", false);
-                    editor.apply();
-                    lanSwitch.setChecked(false);
-                    setLocale("nl");
-                }
+                SharedPreferences.Editor editor = getSharedPreferences("save", MODE_PRIVATE).edit();
+                editor.putBoolean("value", true);
+                editor.apply();
+                setLocale("en");
             }
-        }));
+        });
+        nlbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = getSharedPreferences("save", MODE_PRIVATE).edit();
+                editor.putBoolean("value", false);
+                editor.apply();
+                setLocale("nl");
+            }
+        });
+
 
         // Navigation
         navBar = findViewById(R.id.bottom_navigation);
@@ -145,18 +137,6 @@ public class Settings extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        goContacts = findViewById(R.id.gotoContacts);
-        goContacts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Settings.this, Contacts.class);
-                startActivity(intent);
-            }
-        });
-
-
-
 
     }
 
