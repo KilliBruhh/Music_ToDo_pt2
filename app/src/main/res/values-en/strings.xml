@@ -2,7 +2,7 @@
 
 <resources>
 
-    <string name="app_name">MusicApp_Project_APPDEV</string>
+    <string name="app_name">Music saver</string>
     <string name="song_name">Song name</string>
     <string name="song_album">Song Album</string>
     <string name="song_duration">Song Duration</string>

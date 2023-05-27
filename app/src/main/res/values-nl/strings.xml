@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MusicApp_Project_APPDEV</string>
+    <string name="app_name">Muziek opslager</string>
     <string name="song_name">naam nummer</string>
     <string name="song_album">Album naam</string>
     <string name="song_duration">duur Nummer</string>
