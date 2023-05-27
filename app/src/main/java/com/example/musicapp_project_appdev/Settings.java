@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
+import android.webkit.WebView;
+
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,7 +48,7 @@ public class Settings extends AppCompatActivity {
         Button backButton;
         Switch lanSwitch, modeSwitch;
 
-        // Switch for Language
+        // Switch for Languag
         Button engbutton = findViewById(R.id.englishButton);
         Button nlbutton = findViewById(R.id.dutchButton);
         engbutton.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +57,8 @@ public class Settings extends AppCompatActivity {
                 SharedPreferences.Editor editor = getSharedPreferences("save", MODE_PRIVATE).edit();
                 editor.putBoolean("value", true);
                 editor.apply();
+                Intent intentSettings = new Intent(Settings.this, Settings.class);
+                startActivity(intentSettings);
                 setLocale("en");
             }
         });
@@ -64,6 +68,8 @@ public class Settings extends AppCompatActivity {
                 SharedPreferences.Editor editor = getSharedPreferences("save", MODE_PRIVATE).edit();
                 editor.putBoolean("value", false);
                 editor.apply();
+                Intent intentSettings = new Intent(Settings.this, Settings.class);
+                startActivity(intentSettings);
                 setLocale("nl");
             }
         });
