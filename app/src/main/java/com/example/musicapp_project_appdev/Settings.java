@@ -96,69 +96,27 @@ public class Settings extends AppCompatActivity {
                         return false;
                     }
                 });
-        /*
-        navBar = findViewById(R.id.bottom_navigation);
-        navBar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.goHome:
-                        Intent intentHome = new Intent(Settings.this, MainActivity.class);
-                        startActivity(intentHome);
-                        break;
-                    case R.id.goSettings:
-                        Intent intentSettings = new Intent(Settings.this, Settings.class);
-                        startActivity(intentSettings);
-                        break;
-                    case R.id.goAddSong:
-                        Intent intentAddSong = new Intent(Settings.this, AddMusic.class);
-                        startActivity(intentAddSong);
-                        break;
-                }
-                return false;
-            }
-        });
-        */
-
 
 
         // Switch for theme mode
-        modeSwitch = findViewById(R.id.kleurSwitch);
-        SharedPreferences spMode = getSharedPreferences("saveMode", MODE_PRIVATE);
-        modeSwitch.setChecked(spMode.getBoolean("valueMode", false));
 
-        modeSwitch.setOnClickListener(new View.OnClickListener() {
+        Button darkbutton = findViewById(R.id.darkButton);
+        Button lightbutton = findViewById(R.id.lightButton);
+        darkbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (modeSwitch.isChecked()) {
-                    /*
-                    SharedPreferences.Editor editorMode = getSharedPreferences("saveMode", MODE_PRIVATE).edit();
-                    editorMode.putBoolean("valueMode", true);
-                    editorMode.apply();
-                    */
+                // dark mode
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
-                    modeSwitch.setChecked(true);
-                    //Dark mode
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-
-                }
-                else {
-                    /*
-                    SharedPreferences.Editor editorMode = getSharedPreferences("saveMode", MODE_PRIVATE).edit();
-                    editorMode.putBoolean("valueMode", false);
-                    editorMode.apply();
-                    */
-
-                    modeSwitch.setChecked(false);
-                    // Light mode
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
-                }
             }
         });
-
-
-
+        lightbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Light mode
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        });
 
 
 
