@@ -1,11 +1,14 @@
 package com.example.musicapp_project_appdev;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -35,20 +38,12 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
-        // CHeck Condition
-        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            // Is Dark
-            setTheme(R.style.Theme_Dark);
-        }else {
-            // is Light
-            setTheme((R.style.Theme_Light));
-        }
+        loadLocaleLang();
 
         Button backButton;
         Switch lanSwitch, modeSwitch;
 
-        // Switch for Languag
+        // Switch for Language
         Button engbutton = findViewById(R.id.englishButton);
         Button nlbutton = findViewById(R.id.dutchButton);
         engbutton.setOnClickListener(new View.OnClickListener() {
@@ -101,30 +96,35 @@ public class Settings extends AppCompatActivity {
 
         // Switch for theme mode
         modeSwitch = findViewById(R.id.kleurSwitch);
-
         SharedPreferences spMode = getSharedPreferences("saveMode", MODE_PRIVATE);
-
         modeSwitch.setChecked(spMode.getBoolean("valueMode", false));
 
         modeSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (modeSwitch.isChecked()) {
+                    /*
                     SharedPreferences.Editor editorMode = getSharedPreferences("saveMode", MODE_PRIVATE).edit();
                     editorMode.putBoolean("valueMode", true);
                     editorMode.apply();
+                    */
+
                     modeSwitch.setChecked(true);
                     //Dark mode
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
                 }
                 else {
+                    /*
                     SharedPreferences.Editor editorMode = getSharedPreferences("saveMode", MODE_PRIVATE).edit();
                     editorMode.putBoolean("valueMode", false);
                     editorMode.apply();
-                    modeSwitch.setChecked(false);
+                    */
 
+                    modeSwitch.setChecked(false);
                     // Light mode
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
                 }
             }
         });
@@ -143,7 +143,35 @@ public class Settings extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
 
+    public void loadLocaleLang() {
+        String langPref = "Language";
+        SharedPreferences prefs = getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
+        String language = prefs.getString(langPref, "");
+        changeLang(language);
+    }
+
+    public void changeLang(String lang) {
+        if(lang.equalsIgnoreCase("")) {
+            return;
+        }
+        Locale myLocale = new Locale(lang);
+        saveLocaleLang(lang);
+        Locale.setDefault(myLocale);
+        android.content.res.Configuration config = new android.content.res.Configuration();
+        config.locale = myLocale;
+        getBaseContext().getResources().updateConfiguration(config,getBaseContext().getResources().getDisplayMetrics());
+
+    }
+
+    public void saveLocaleLang(String lang) {
+        String langPref = "Language";
+        SharedPreferences prefs = getSharedPreferences("CommonPrefs",
+                Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(langPref, lang);
+        editor.commit();
     }
 
     private void setLocale(String lang) {

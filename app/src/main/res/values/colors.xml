@@ -25,19 +25,7 @@
     <color name="JapanRed">#B91343</color>
     <color name="JapanWooed">#A8806B</color>
 
-    <!--
-    UI overhaul colors
-
-    Primaty:
-        - Purple Items / sub backgrounds
-        - White background
-        - Black Text/border
-        -> black and white switch when using dark/light mode
-   Secondary
-        - Greem
-
-    -->
-    <color name="purple">#87098A</color>
+    <color name="purple">#018856</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="musicGreen">#018856</color>
