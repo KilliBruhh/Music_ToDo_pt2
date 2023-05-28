@@ -1,5 +1,6 @@
 package com.example.musicapp_project_appdev;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -45,6 +46,29 @@ public class AddMusic extends AppCompatActivity {
 
         // Navigation
         navBar = findViewById(R.id.bottom_navigation);
+        navBar.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.goAddSong:
+                                Intent intentAddSong = new Intent(AddMusic.this, AddMusic.class);
+                                startActivity(intentAddSong);
+                                return true;
+                            case R.id.goHome:
+                                Intent intentHome = new Intent(AddMusic.this, MainActivity.class);
+                                startActivity(intentHome);
+                                break;
+                            case R.id.goSettings:
+                                Intent intentSettings = new Intent(AddMusic.this, Settings.class);
+                                startActivity(intentSettings);
+                                break;
+                        }
+                        navBar.getMenu().findItem(R.id.goHome).setChecked(false);
+                        return false;
+                    }
+                });
+        /*
         navBar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -65,5 +89,6 @@ public class AddMusic extends AppCompatActivity {
                 return false;
             }
         });
+        */
     }
 }

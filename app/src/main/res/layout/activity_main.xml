@@ -70,7 +70,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/container"
         app:menu="@menu/bottom_nav_menu"
         app:itemTextColor="@color/purple"
-        app:itemIconTint="@color/purple">
+        app:itemIconTint="@color/purple"
+  >
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 

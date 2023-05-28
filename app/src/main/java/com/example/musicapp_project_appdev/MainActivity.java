@@ -62,6 +62,30 @@ public class MainActivity extends AppCompatActivity {
 
         // Navigation
         navBar = findViewById(R.id.bottom_navigation);
+        navBar.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.goAddSong:
+                                Intent intentAddSong = new Intent(MainActivity.this, AddMusic.class);
+                                startActivity(intentAddSong);
+                                return true;
+                            case R.id.goHome:
+                                Intent intentHome = new Intent(MainActivity.this, MainActivity.class);
+                                startActivity(intentHome);
+                                break;
+                            case R.id.goSettings:
+                                Intent intentSettings = new Intent(MainActivity.this, Settings.class);
+                                startActivity(intentSettings);
+                                break;
+                        }
+                        navBar.getMenu().findItem(R.id.goHome).setChecked(false);
+                        return false;
+                    }
+                });
+        /*
+        navBar = findViewById(R.id.bottom_navigation);
         navBar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -82,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
+    */
         db = new MusicDatabase(MainActivity.this);
         songId = new ArrayList<>();
         songName = new ArrayList<>();

@@ -17,6 +17,7 @@ import android.webkit.WebView;
 
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -39,6 +40,7 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         loadLocaleLang();
+
 
         Button backButton;
         Switch lanSwitch, modeSwitch;
@@ -72,6 +74,30 @@ public class Settings extends AppCompatActivity {
 
         // Navigation
         navBar = findViewById(R.id.bottom_navigation);
+        navBar.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.goAddSong:
+                                Intent intentAddSong = new Intent(Settings.this, AddMusic.class);
+                                startActivity(intentAddSong);
+                                return true;
+                            case R.id.goHome:
+                                Intent intentHome = new Intent(Settings.this, MainActivity.class);
+                                startActivity(intentHome);
+                                break;
+                            case R.id.goSettings:
+                                Intent intentSettings = new Intent(Settings.this, Settings.class);
+                                startActivity(intentSettings);
+                                break;
+                        }
+                        navBar.getMenu().findItem(R.id.goHome).setChecked(false);
+                        return false;
+                    }
+                });
+        /*
+        navBar = findViewById(R.id.bottom_navigation);
         navBar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -92,6 +118,8 @@ public class Settings extends AppCompatActivity {
                 return false;
             }
         });
+        */
+
 
 
         // Switch for theme mode
