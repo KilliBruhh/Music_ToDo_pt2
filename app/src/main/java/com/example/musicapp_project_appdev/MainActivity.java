@@ -103,19 +103,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void savaData() {
-        Cursor cursor = db.readDataFromDataBase();
-        // 0 means no data
-        if(cursor.getCount() == 0){
-            Toast.makeText(this, "No Data in Database", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            while(cursor.moveToNext()){
-                songId.add(cursor.getString(0));
-                songName.add(cursor.getString(1));
-                songAlbum.add(cursor.getString(2));
-                songDuration.add(cursor.getString(3));
-            }
-        }
+       Uri uri = MyContract.DataEntry.CONTENT_URI;
+       String[] projection = {MyContract.DataEntry.COLUMN_ID, MyContract.DataEntry.COLUMN_NAME, MyContract.DataEntry.COLUMN_ALBUM, MyContract.DataEntry.COLUMN_DURATION};
+
+       Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+
+       if(cursor != null) {
+           while (cursor.moveToNext()) {
+               songId.add(cursor.getString(cursor.getColumnIndexOrThrow(MyContract.DataEntry.COLUMN_ID)));
+               songName.add(cursor.getString(cursor.getColumnIndexOrThrow(MyContract.DataEntry.COLUMN_NAME)));
+               songAlbum.add(cursor.getString(cursor.getColumnIndexOrThrow(MyContract.DataEntry.COLUMN_ALBUM)));
+               songDuration.add(cursor.getString(cursor.getColumnIndexOrThrow(MyContract.DataEntry.COLUMN_DURATION)));
+           }
+           cursor.close();
+       }
     }
 
 
