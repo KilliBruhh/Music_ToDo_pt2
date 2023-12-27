@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentProvider;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +22,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.MediaStore;
+import android.provider.UserDictionary;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     Button b;
 
     public FloatingActionButton fab;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,29 +86,7 @@ public class MainActivity extends AppCompatActivity {
                         return false;
                     }
                 });
-        /*
-        navBar = findViewById(R.id.bottom_navigation);
-        navBar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.goHome:
-                        Intent intentHome = new Intent(MainActivity.this, MainActivity.class);
-                        startActivity(intentHome);
-                        break;
-                    case R.id.goSettings:
-                        Intent intentSettings = new Intent(MainActivity.this, Settings.class);
-                        startActivity(intentSettings);
-                        break;
-                    case R.id.goAddSong:
-                        Intent intentAddSong = new Intent(MainActivity.this, AddMusic.class);
-                        startActivity(intentAddSong);
-                        break;
-                }
-                return false;
-            }
-        });
-    */
+
         db = new MusicDatabase(MainActivity.this);
         songId = new ArrayList<>();
         songName = new ArrayList<>();
@@ -118,22 +98,25 @@ public class MainActivity extends AppCompatActivity {
         customAdapter = new CustomAdapter(MainActivity.this, songId, songName, songAlbum, songDuration);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+
+
     }
 
     void savaData() {
-        Cursor cursor = db.readDataFromDataBase();
-        // 0 means no data
-        if(cursor.getCount() == 0){
-            Toast.makeText(this, "No Data in Database", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            while(cursor.moveToNext()){
-                songId.add(cursor.getString(0));
-                songName.add(cursor.getString(1));
-                songAlbum.add(cursor.getString(2));
-                songDuration.add(cursor.getString(3));
-            }
-        }
+       Uri uri = MyContract.DataEntry.CONTENT_URI;
+       String[] projection = {MyContract.DataEntry.COLUMN_ID, MyContract.DataEntry.COLUMN_NAME, MyContract.DataEntry.COLUMN_ALBUM, MyContract.DataEntry.COLUMN_DURATION};
+
+       Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+
+       if(cursor != null) {
+           while (cursor.moveToNext()) {
+               songId.add(cursor.getString(cursor.getColumnIndexOrThrow(MyContract.DataEntry.COLUMN_ID)));
+               songName.add(cursor.getString(cursor.getColumnIndexOrThrow(MyContract.DataEntry.COLUMN_NAME)));
+               songAlbum.add(cursor.getString(cursor.getColumnIndexOrThrow(MyContract.DataEntry.COLUMN_ALBUM)));
+               songDuration.add(cursor.getString(cursor.getColumnIndexOrThrow(MyContract.DataEntry.COLUMN_DURATION)));
+           }
+           cursor.close();
+       }
     }
 
 

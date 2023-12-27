@@ -14,6 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Light">
+        <provider
+            android:authorities="com.example.musicapp_project_appdev.provider"
+            android:name=".MyContentProvider"
+            android:exported="false" />
         <activity
             android:name=".Contacts"
             android:exported="false" />
