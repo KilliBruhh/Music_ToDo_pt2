@@ -27,6 +27,7 @@ import android.provider.UserDictionary;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -36,7 +37,21 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MasterFragment.OnItemSelectedListener, AdapterView.OnItemSelectedListener {
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // Your implementation when an item is selected in the AdapterView
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Handle the case where nothing is selected (optional)
+    }
+
+    @Override
+    public void onItemSelected(int itemId) {
+        // Your implementation when an item is selected in the MasterFragment
+    }
 
     RecyclerView recyclerView;
 
@@ -58,31 +73,35 @@ public class MainActivity extends AppCompatActivity {
 
         // Check theme Condition
 
+        // Set up the MasterFragment
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container_master, new MasterFragment())
+                    .commit();
+        }
 
-
-        recyclerView = findViewById(R.id.recyclerView);
-
-        // Navigation
+        // Bottom Navigation setup
         navBar = findViewById(R.id.bottom_navigation);
         navBar.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()){
+                        switch (item.getItemId()) {
                             case R.id.goAddSong:
+                                // Handle "Add Song" action
                                 Intent intentAddSong = new Intent(MainActivity.this, AddMusic.class);
                                 startActivity(intentAddSong);
                                 return true;
                             case R.id.goHome:
-                                Intent intentHome = new Intent(MainActivity.this, MainActivity.class);
-                                startActivity(intentHome);
-                                break;
+                                // Handle "Home" action
+                                // No need to start a new MainActivity, as we're already in it
+                                return true;
                             case R.id.goSettings:
+                                // Handle "Settings" action
                                 Intent intentSettings = new Intent(MainActivity.this, Settings.class);
                                 startActivity(intentSettings);
-                                break;
+                                return true;
                         }
-                        navBar.getMenu().findItem(R.id.goHome).setChecked(false);
                         return false;
                     }
                 });
@@ -93,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
         songAlbum = new ArrayList<>();
         songDuration = new ArrayList<>();
 
+        recyclerView = findViewById(R.id.recyclerView);
         savaData();
 
         customAdapter = new CustomAdapter(MainActivity.this, songId, songName, songAlbum, songDuration);
@@ -118,9 +138,4 @@ public class MainActivity extends AppCompatActivity {
            cursor.close();
        }
     }
-
-
-
-
-
 }
