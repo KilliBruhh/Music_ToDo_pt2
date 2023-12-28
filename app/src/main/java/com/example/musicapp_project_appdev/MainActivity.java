@@ -49,7 +49,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity  implements MasterFragment.OnItemSelectedListener {
-    RecyclerView recyclerView;
     MusicDatabase db;
     ArrayList<String> songId, songName, songAlbum, songDuration;
     CustomAdapter customAdapter;
@@ -60,8 +59,8 @@ public class MainActivity extends AppCompatActivity  implements MasterFragment.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+        // ActionBar actionBar = getSupportActionBar();
+        // actionBar.hide();
 
         // Check theme Condition
 
@@ -104,12 +103,9 @@ public class MainActivity extends AppCompatActivity  implements MasterFragment.O
         songAlbum = new ArrayList<>();
         songDuration = new ArrayList<>();
 
-        recyclerView = findViewById(R.id.recyclerView);
         saveData();
 
         customAdapter = new CustomAdapter(MainActivity.this, songId, songName, songAlbum, songDuration);
-        recyclerView.setAdapter(customAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
     }
 
     void saveData() {
@@ -136,7 +132,7 @@ public class MainActivity extends AppCompatActivity  implements MasterFragment.O
         // Handle item selection
         // You can start the DetailActivity and pass the selected item ID to it
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-        intent.putExtra("itemId", itemId);
+        intent.putExtra("itemId", itemId+1);
         startActivity(intent);
     }
 }
