@@ -22,7 +22,7 @@ public class DetailActivity extends AppCompatActivity {
         db = new MusicDatabase(DetailActivity.this);
 
         // Retrieve the selected item ID from the intent
-        long itemId = getIntent().getLongExtra("itemId", -1);
+        int itemId = getIntent().getIntExtra("itemId", -1);
         Log.d("DetailActivity", "Received item ID: " + itemId);
 
         // Initialize your UI components (TextViews, etc.)
@@ -49,7 +49,7 @@ public class DetailActivity extends AppCompatActivity {
 
             textViewSongName.setText("Song Name: " + songName);
             textViewAlbum.setText("Album: " + album);
-            textViewDuration.setText("Duration: " + duration);
+            textViewDuration.setText("Duration: " + itemId);
 
             // Close the cursor
             cursor.close();

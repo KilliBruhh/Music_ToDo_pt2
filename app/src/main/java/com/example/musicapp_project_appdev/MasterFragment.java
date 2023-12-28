@@ -76,15 +76,15 @@ public class MasterFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, songNames);
         listView.setAdapter(adapter);
 
-        // Set up item click listener to notify the hosting activity when an item is selected
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Notify the hosting activity with the selected item ID
                 if (listener != null) {
-                    listener.onItemSelected(position + 1); // Assuming item IDs start from 1
+                    listener.onItemSelected(2); // Assuming item IDs start from 1
                 }
             }
         });
+
     }
 }
