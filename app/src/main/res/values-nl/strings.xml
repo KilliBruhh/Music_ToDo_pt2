@@ -43,6 +43,7 @@
     <string name="dutchButton">Nederlands</string>
 
     <string name="listTitle">Je Nummers die je wilt beluisteren!</string>
+    <string name="detailPageInfo">Informatie over het nummber!</string>
 
 
 </resources>

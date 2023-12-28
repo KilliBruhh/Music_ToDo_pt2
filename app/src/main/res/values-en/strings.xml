@@ -44,7 +44,8 @@
     <string name="discAlbum">Album</string>
     <string name="discDuration">Duration</string>
 
-    <string name="listTitle">Your SOngs to Listen to!</string>
+    <string name="listTitle">Your Songs to Listen to!</string>
+    <string name="detailPageInfo">Information about the Song!</string>
 
 
 

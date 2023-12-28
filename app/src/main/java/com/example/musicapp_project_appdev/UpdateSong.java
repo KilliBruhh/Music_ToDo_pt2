@@ -37,8 +37,6 @@ public class UpdateSong extends AppCompatActivity {
 
         getChosenSongsData();
 
-        ActionBar ab = getSupportActionBar();
-        ab.setTitle(name);
 
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +84,7 @@ public class UpdateSong extends AppCompatActivity {
 
     void getChosenSongsData(){
         if(getIntent().hasExtra("id") && getIntent().hasExtra("name") && getIntent().hasExtra("album") && getIntent().hasExtra("duration")) {
-            id = getIntent().getStringExtra("id");
+            id = String.valueOf(getIntent().getIntExtra("id", -1));
             name = getIntent().getStringExtra("name");
             album = getIntent().getStringExtra("album");
             duration = getIntent().getStringExtra("duration");

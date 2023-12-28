@@ -20,6 +20,9 @@
         <item name="button_color">#3B8AC3</item>
         <item name="switch_color">@color/OceanDarkBlue</item>
         <item name="specialText">@color/MossBlue</item>
+        
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
 
     </style>
 </resources>
