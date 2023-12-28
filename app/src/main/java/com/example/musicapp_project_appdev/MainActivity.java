@@ -35,19 +35,25 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 
+import android.content.Intent;
+import android.os.Bundle;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity  implements MasterFragment.OnItemSelectedListener {
     RecyclerView recyclerView;
-
     MusicDatabase db;
     ArrayList<String> songId, songName, songAlbum, songDuration;
     CustomAdapter customAdapter;
     BottomNavigationView navBar;
-    Button b;
-
-    public FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +64,13 @@ public class MainActivity extends AppCompatActivity {
         actionBar.hide();
 
         // Check theme Condition
+
+        // Set up the MasterFragment
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container_master, new MasterFragment())
+                    .commit();
+        }
 
         // Bottom Navigation setup
         navBar = findViewById(R.id.bottom_navigation);
@@ -92,29 +105,38 @@ public class MainActivity extends AppCompatActivity {
         songDuration = new ArrayList<>();
 
         recyclerView = findViewById(R.id.recyclerView);
-        savaData();
+        saveData();
 
         customAdapter = new CustomAdapter(MainActivity.this, songId, songName, songAlbum, songDuration);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-
-
     }
 
-    void savaData() {
-       Uri uri = MyContract.DataEntry.CONTENT_URI;
-       String[] projection = {MyContract.DataEntry.COLUMN_ID, MyContract.DataEntry.COLUMN_NAME, MyContract.DataEntry.COLUMN_ALBUM, MyContract.DataEntry.COLUMN_DURATION};
+    void saveData() {
+        // Assuming MyContract.DataEntry is the contract class for your content provider
+        Uri uri = MyContract.DataEntry.CONTENT_URI;
+        String[] projection = {MyContract.DataEntry.COLUMN_ID, MyContract.DataEntry.COLUMN_NAME, MyContract.DataEntry.COLUMN_ALBUM, MyContract.DataEntry.COLUMN_DURATION};
 
-       Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
 
-       if(cursor != null) {
-           while (cursor.moveToNext()) {
-               songId.add(cursor.getString(cursor.getColumnIndexOrThrow(MyContract.DataEntry.COLUMN_ID)));
-               songName.add(cursor.getString(cursor.getColumnIndexOrThrow(MyContract.DataEntry.COLUMN_NAME)));
-               songAlbum.add(cursor.getString(cursor.getColumnIndexOrThrow(MyContract.DataEntry.COLUMN_ALBUM)));
-               songDuration.add(cursor.getString(cursor.getColumnIndexOrThrow(MyContract.DataEntry.COLUMN_DURATION)));
-           }
-           cursor.close();
-       }
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                songId.add(cursor.getString(cursor.getColumnIndexOrThrow(MyContract.DataEntry.COLUMN_ID)));
+                songName.add(cursor.getString(cursor.getColumnIndexOrThrow(MyContract.DataEntry.COLUMN_NAME)));
+                songAlbum.add(cursor.getString(cursor.getColumnIndexOrThrow(MyContract.DataEntry.COLUMN_ALBUM)));
+                songDuration.add(cursor.getString(cursor.getColumnIndexOrThrow(MyContract.DataEntry.COLUMN_DURATION)));
+            }
+            cursor.close();
+        }
+    }
+
+    // Implementation of the OnItemSelectedListener interface from MasterFragment
+    @Override
+    public void onItemSelected(int itemId) {
+        // Handle item selection
+        // You can start the DetailActivity and pass the selected item ID to it
+        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+        intent.putExtra("itemId", itemId);
+        startActivity(intent);
     }
 }
