@@ -37,21 +37,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements MasterFragment.OnItemSelectedListener, AdapterView.OnItemSelectedListener {
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // Your implementation when an item is selected in the AdapterView
-    }
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        // Handle the case where nothing is selected (optional)
-    }
-
-    @Override
-    public void onItemSelected(int itemId) {
-        // Your implementation when an item is selected in the MasterFragment
-    }
+public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
@@ -72,13 +58,6 @@ public class MainActivity extends AppCompatActivity implements MasterFragment.On
         actionBar.hide();
 
         // Check theme Condition
-
-        // Set up the MasterFragment
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container_master, new MasterFragment())
-                    .commit();
-        }
 
         // Bottom Navigation setup
         navBar = findViewById(R.id.bottom_navigation);
