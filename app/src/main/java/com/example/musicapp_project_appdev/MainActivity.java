@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -173,7 +174,16 @@ public class MainActivity extends AppCompatActivity  implements MasterFragment.O
 
                         // Check if any of the data is null before passing to displayDetails
                         if (s_songName != null && s_songAlbum != null && s_songDuration != null) {
-                            detailFragment.displayDetails(s_songName, s_songAlbum, s_songDuration);
+                            detailFragment.saveDetails(s_songName, s_songAlbum, s_songDuration);
+                            // Assuming detailFragment is an instance of DetailFragment
+                            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+                            // Replace the fragment
+                            fragmentTransaction.replace(R.id.container_detail, DetailFragment.newInstance(itemId));
+
+                            // Commit the transaction
+                            fragmentTransaction.commit();
+
                         } else {
                             Log.e("MainActivity", "One or more retrieved values are null");
                         }
