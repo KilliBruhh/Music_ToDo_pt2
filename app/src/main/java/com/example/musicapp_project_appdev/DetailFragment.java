@@ -1,9 +1,11 @@
 package com.example.musicapp_project_appdev;
 
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ public class DetailFragment extends Fragment {
     private TextView textViewDuration;
 
     public String song, album, duration;
+    MusicDatabase db;
 
     public DetailFragment() {
         // Required empty public constructor
@@ -48,16 +51,13 @@ public class DetailFragment extends Fragment {
     }
 
     public void displayDetails(String songName, String songAlbum, String songDuration) {
-        // Update TextViews with details
-        textViewSongName.setText("Song Name: " + songName);
-        textViewAlbum.setText("Album: " + songAlbum);
-        textViewDuration.setText("Duration: " + songDuration);
-    }
-
-    public void saveData(String songName, String songAlbum, String songDuration) {
         song = songName;
         album = songAlbum;
         duration = songDuration;
+
+        textViewSongName.setText("Song Name: " + song);
+        textViewAlbum.setText("Album: " + album);
+        textViewDuration.setText("Duration: " + duration);
     }
 
     public static DetailFragment newInstance(int itemId) {

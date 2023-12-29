@@ -52,6 +52,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity  implements MasterFragment.OnItemSelectedListener {
     MusicDatabase db;
     ArrayList<String> songId, songName, songAlbum, songDuration;
+    String s_songName, s_songAlbum, s_songDuration = "";
     CustomAdapter customAdapter;
     BottomNavigationView navBar;
     DetailFragment detailFragment;
@@ -153,15 +154,31 @@ public class MainActivity extends AppCompatActivity  implements MasterFragment.O
     // Implementation of the OnItemSelectedListener interface from MasterFragment
     @Override
     public void onItemSelected(int itemId) {
+
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            // In landscape mode, show details in the DetailFragment
-            DetailFragment detailFragment = DetailFragment.newInstance(itemId);
-            // Pass your data to the fragment before committing the transaction
-            detailFragment.saveData("SongName", "AlbumName", "123");
-            Log.d("MainActivity", "Clicked on shit in landscape mode");
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container_detail, detailFragment)
-                    .commit();
+            if (detailFragment != null) {
+                db = new MusicDatabase(MainActivity.this);
+                int Id = itemId - 1;
+                Cursor cursor = db.readDataFromDataBaseById(String.valueOf(itemId));
+
+                if (cursor != null && cursor.moveToFirst()) {
+                    s_songName = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_NAME));
+                    s_songAlbum = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_ALBUM));
+                    s_songDuration = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_DURATION));
+
+                    // Check if any of the data is null before passing to displayDetails
+                    if (s_songName != null && s_songAlbum != null && s_songDuration != null) {
+                        detailFragment.displayDetails(s_songName, s_songAlbum, s_songDuration);
+
+                    }
+
+                    Log.d("DetailActivity", "Details: " + s_songName + ", " + s_songAlbum + ", " + s_songDuration + ", " + Id + ", " + itemId);
+                    cursor.close();
+                }
+            } else {
+                // Handle the case where detailFragment is null
+                Log.e("DetailActivity", "detailFragment is null");
+            }
         } else {
             // In portrait mode, start the DetailActivity
             Intent intent = new Intent(MainActivity.this, DetailActivity.class);
