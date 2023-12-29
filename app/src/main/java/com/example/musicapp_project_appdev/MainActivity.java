@@ -61,6 +61,20 @@ public class MainActivity extends AppCompatActivity  implements MasterFragment.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container_master, new MasterFragment())
+                    .replace(R.id.container_detail, new DetailFragment())
+                    .commit();
+        } else {
+            if (savedInstanceState == null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container_master, new MasterFragment())
+                        .commit();
+            }
+        }
+
+
 
         if (getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
             if (savedInstanceState == null) {
