@@ -8,7 +8,7 @@
 
 
     <fragment
-        android:id="@+id/fragment_master"
+        android:id="@+id/container_master"
         class="com.example.musicapp_project_appdev.MasterFragment"
         android:layout_width="222dp"
         android:layout_height="355dp"

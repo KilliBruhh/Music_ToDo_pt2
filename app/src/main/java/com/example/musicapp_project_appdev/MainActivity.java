@@ -18,6 +18,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -53,14 +54,23 @@ public class MainActivity extends AppCompatActivity  implements MasterFragment.O
     ArrayList<String> songId, songName, songAlbum, songDuration;
     CustomAdapter customAdapter;
     BottomNavigationView navBar;
+    DetailFragment detailFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // ActionBar actionBar = getSupportActionBar();
-        // actionBar.hide();
+
+        if (getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
+            if (savedInstanceState == null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container_master, new MasterFragment())
+                        .commit();
+            }
+        }
+
+
 
         // Check theme Condition
 
