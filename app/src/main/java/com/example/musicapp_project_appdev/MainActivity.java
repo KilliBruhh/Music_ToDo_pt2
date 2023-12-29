@@ -58,6 +58,12 @@ public class MainActivity extends AppCompatActivity  implements MasterFragment.O
     BottomNavigationView navBar;
     DetailFragment detailFragment = new DetailFragment();
 
+    // TODO
+    //  - unclutter the code from the landscape stuff
+    //  - Add the edit button to the land MDF
+    //  - Fix the tests For Delete and Edit that it takes the newly added song and Tests with that
+    //  - Check for string stuff and color stuff
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
