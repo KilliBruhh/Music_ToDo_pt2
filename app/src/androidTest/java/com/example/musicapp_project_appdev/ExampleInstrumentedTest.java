@@ -66,14 +66,16 @@ public class ExampleInstrumentedTest {
     // Test when u want to edit the editText fields are not empty
     @Test
     public void testUpdateFields() {
-        ActivityScenario mainActivityScenario = ActivityScenario.launch(DetailActivity.class);
-
+        // In Mainactivity clickin on items in Master fragmnet
+        ActivityScenario mainActivityScenario = ActivityScenario.launch(MainActivity.class);
+        onView(withId(R.id.listView)).perform(click());
+        // In Detail Activity
         onView(withId(R.id.GoEditButton)).perform(click());
-
+        // in Edit Activity
         onView(withId(R.id.songName)).perform(replaceText("Test Edit Song"));
         onView(withId(R.id.AlbumName)).perform(replaceText("Test Edit Album"));
         onView(withId(R.id.durationSong)).perform(replaceText("222")).perform(closeSoftKeyboard());
-
+        // Confirming deletion
         onView(withId(R.id.EditSongButton)).perform(click());
     }
 
@@ -103,7 +105,7 @@ public class ExampleInstrumentedTest {
         ActivityScenario mainActivityScenario = ActivityScenario.launch(Settings.class);
         onView(withId(R.id.darkButton)).perform(click());
         Espresso.onView(ViewMatchers.withId(R.id.taalTextview))
-                .check(ViewAssertions.matches(ViewMatchers.hasTextColor(R.color.black)));
+                .check(ViewAssertions.matches(ViewMatchers.hasTextColor(R.color.textColorDarkMode)));
     }
 
 }
