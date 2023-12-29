@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -22,6 +23,7 @@ public class DetailActivity extends AppCompatActivity {
     MusicDatabase db;
     BottomNavigationView navBar;
     String songName, songAlbum, songDuration;
+    FloatingActionButton backButton;
 
 
     @Override
@@ -77,6 +79,14 @@ public class DetailActivity extends AppCompatActivity {
                 intent.putExtra("album", songAlbum);
                 intent.putExtra("duration", songDuration);
 
+                startActivity(intent);
+            }
+        });
+        backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
