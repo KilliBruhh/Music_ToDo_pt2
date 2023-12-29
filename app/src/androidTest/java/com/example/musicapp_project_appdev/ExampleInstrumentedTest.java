@@ -66,13 +66,13 @@ public class ExampleInstrumentedTest {
     // Test when u want to edit the editText fields are not empty
     @Test
     public void testUpdateFields() {
-        ActivityScenario mainActivityScenario = ActivityScenario.launch(UpdateSong.class);
+        ActivityScenario mainActivityScenario = ActivityScenario.launch(DetailActivity.class);
 
-        onView(withId(R.id.editButton)).perform(click());
+        onView(withId(R.id.GoEditButton)).perform(click());
 
-        onView(withId(R.id.EditSongName)).check(matches(withText("Test Song")));
-        onView(withId(R.id.EditAlbumSong)).check(matches(withText("Test Album")));
-        onView(withId(R.id.EditDurationSong)).check(matches(withText("111"))).perform(closeSoftKeyboard());
+        onView(withId(R.id.songName)).perform(replaceText("Test Edit Song"));
+        onView(withId(R.id.AlbumName)).perform(replaceText("Test Edit Album"));
+        onView(withId(R.id.durationSong)).perform(replaceText("222")).perform(closeSoftKeyboard());
 
         onView(withId(R.id.EditSongButton)).perform(click());
     }
@@ -80,9 +80,9 @@ public class ExampleInstrumentedTest {
     // Test Delete
     @Test
     public void testDeleteSong() {
-        ActivityScenario mainActivityScenario = ActivityScenario.launch(MainActivity.class);
+        ActivityScenario mainActivityScenario = ActivityScenario.launch(DetailActivity.class);
 
-        onView(withId(R.id.editButton)).perform(click());
+        onView(withId(R.id.GoEditButton)).perform(click());
 
         onView(withId(R.id.DeleteSongButton)).perform(click());
     }
