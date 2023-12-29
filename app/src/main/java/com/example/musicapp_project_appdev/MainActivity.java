@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity  implements MasterFragment.O
         // Handle item selection
         // You can start the DetailActivity and pass the selected item ID to it
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-        intent.putExtra("itemId", itemId+1);
+        intent.putExtra("itemId", itemId);
         startActivity(intent);
     }
 }
