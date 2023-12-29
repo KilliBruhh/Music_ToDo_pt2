@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -52,39 +54,40 @@ public class MasterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Assuming you have a ListView with the id "listView" in your fragment_master.xml layout
         ListView listView = view.findViewById(R.id.listView);
 
         // Fetch data from the database
         MusicDatabase db = new MusicDatabase(requireContext());
         Cursor cursor = db.readDataFromDataBase();
 
-        // Assuming you have columns named COLUMN_NAME in your database
-        ArrayList<String> songNames = new ArrayList<>();
+        // Use a SimpleCursorAdapter to bind data to the ListView
+        String[] fromColumns = {MusicDatabase.COLUMN_NAME};
+        int[] toViews = {android.R.id.text1}; // The TextView in simple_list_item_1
 
-        while (cursor != null && cursor.moveToNext()) {
-            String songName = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_NAME));
-            songNames.add(songName);
-        }
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(
+                requireContext(),
+                android.R.layout.simple_list_item_1,
+                cursor,
+                fromColumns,
+                toViews,
+                0
+        );
 
-        // Close the cursor after use
-        if (cursor != null) {
-            cursor.close();
-        }
-
-        // Use ArrayAdapter to populate the ListView with data from the database
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, songNames);
         listView.setAdapter(adapter);
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Assuming you have a cursor with a column named "_id"
+                Cursor cursor = (Cursor) parent.getItemAtPosition(position);
+
+                // Get the _id value from the cursor
+                int itemId = cursor.getInt(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_ID));
+
                 // Notify the hosting activity with the selected item ID
                 if (listener != null) {
-                    listener.onItemSelected(2); // Assuming item IDs start from 1
+                    listener.onItemSelected(itemId);
                 }
             }
         });
-
     }
 }

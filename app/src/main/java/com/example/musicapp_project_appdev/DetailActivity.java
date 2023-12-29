@@ -1,8 +1,5 @@
 package com.example.musicapp_project_appdev;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -12,7 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -23,7 +25,6 @@ public class DetailActivity extends AppCompatActivity {
     BottomNavigationView navBar;
     String songName, songAlbum, songDuration;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,10 +34,6 @@ public class DetailActivity extends AppCompatActivity {
 
         // Retrieve the selected item ID from the intent
         int itemId = getIntent().getIntExtra("itemId", -1);
-        Log.d("DetailActivity", "Received item ID: " + itemId);
-
-        // Initialize your UI components (TextViews, etc.)
-        // ...
 
         // Fetch data from the database using the correct column name for the ID
         Cursor cursor = db.readDataFromDataBaseById(String.valueOf(itemId));
@@ -53,9 +50,9 @@ public class DetailActivity extends AppCompatActivity {
 
             // Set the text of TextViews with the retrieved details
             // Example (replace with your actual TextViews):
-            TextView textViewSongName = findViewById(R.id.textViewSongName);
-            TextView textViewAlbum = findViewById(R.id.textViewAlbum);
-            TextView textViewDuration = findViewById(R.id.textViewDuration);
+            textViewSongName = findViewById(R.id.textViewSongName);
+            textViewAlbum = findViewById(R.id.textViewAlbum);
+            textViewDuration = findViewById(R.id.textViewDuration);
 
             textViewSongName.setText("Song Name: " + songName);
             textViewAlbum.setText("Album: " + songAlbum);
@@ -105,6 +102,5 @@ public class DetailActivity extends AppCompatActivity {
                         return false;
                     }
                 });
-
     }
 }

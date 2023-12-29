@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +19,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -51,16 +53,46 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity  implements MasterFragment.OnItemSelectedListener {
     MusicDatabase db;
     ArrayList<String> songId, songName, songAlbum, songDuration;
+    String s_songName, s_songAlbum, s_songDuration = "";
     CustomAdapter customAdapter;
     BottomNavigationView navBar;
+    DetailFragment detailFragment = new DetailFragment();
+
+    // TODO
+    //  - unclutter the code from the landscape stuff
+    //  - Add the edit button to the land MDF
+    //  - Fix the tests For Delete and Edit that it takes the newly added song and Tests with that
+    //  - Check for string stuff and color stuff
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // ActionBar actionBar = getSupportActionBar();
-        // actionBar.hide();
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container_master, new MasterFragment())
+                    .replace(R.id.container_detail, new DetailFragment())
+                    .commit();
+        } else {
+            if (savedInstanceState == null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container_master, new MasterFragment())
+                        .commit();
+            }
+        }
+
+
+
+        if (getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
+            if (savedInstanceState == null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container_master, new MasterFragment())
+                        .commit();
+            }
+        }
+
+
 
         // Check theme Condition
 
@@ -129,10 +161,59 @@ public class MainActivity extends AppCompatActivity  implements MasterFragment.O
     // Implementation of the OnItemSelectedListener interface from MasterFragment
     @Override
     public void onItemSelected(int itemId) {
-        // Handle item selection
-        // You can start the DetailActivity and pass the selected item ID to it
-        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-        intent.putExtra("itemId", itemId+1);
-        startActivity(intent);
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            if (detailFragment != null) {
+                db = new MusicDatabase(MainActivity.this);
+                int Id = itemId - 1;
+                Cursor cursor = db.readDataFromDataBaseById(String.valueOf(itemId));
+
+                if (cursor != null) {
+                    Log.d("MainActivity", "Cursor count: " + cursor.getCount());
+
+                    if (cursor.moveToFirst()) {
+                        s_songName = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_NAME));
+                        s_songAlbum = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_ALBUM));
+                        s_songDuration = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_DURATION));
+
+                        Log.d("MainActivity", "Details: " + s_songName + ", " + s_songAlbum + ", " + s_songDuration);
+
+                        // Check if any of the data is null before passing to displayDetails
+                        if (s_songName != null && s_songAlbum != null && s_songDuration != null) {
+                            detailFragment.saveDetails(s_songName, s_songAlbum, s_songDuration);
+                            // Assuming detailFragment is an instance of DetailFragment
+                            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+                            // Replace the fragment
+                            fragmentTransaction.replace(R.id.container_detail, DetailFragment.newInstance(itemId));
+
+                            // Commit the transaction
+                            fragmentTransaction.commit();
+
+                        } else {
+                            Log.e("MainActivity", "One or more retrieved values are null");
+                        }
+                    } else {
+                        Log.e("MainActivity", "Cursor moveToFirst failed. Cursor is empty.");
+                    }
+
+                    cursor.close();
+                } else {
+                    Log.e("MainActivity", "Cursor is null");
+                }
+
+            } else {
+                // Handle the case where detailFragment is null
+                Log.e("MainActivity", "detailFragment is null");
+            }
+        } else {
+            // In portrait mode, start the DetailActivity
+            Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+            intent.putExtra("itemId", itemId);
+            Log.d("MainActivity", "Clicked on shit in Portrait mode");
+
+            startActivity(intent);
+        }
     }
+
 }

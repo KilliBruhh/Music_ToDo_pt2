@@ -47,6 +47,10 @@
     <string name="listTitle">Your Songs to Listen to!</string>
     <string name="detailPageInfo">Information about the Song!</string>
 
+    <string name="select_song">Select Song:</string>
 
+    <string name="name_label">Select Song:</string>
+    <string name="album_label">Select Album:</string>
+    <string name="duration_song">Select Duration:</string>
 
 </resources>
