@@ -153,10 +153,23 @@ public class MainActivity extends AppCompatActivity  implements MasterFragment.O
     // Implementation of the OnItemSelectedListener interface from MasterFragment
     @Override
     public void onItemSelected(int itemId) {
-        // Handle item selection
-        // You can start the DetailActivity and pass the selected item ID to it
-        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-        intent.putExtra("itemId", itemId);
-        startActivity(intent);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // In landscape mode, show details in the DetailFragment
+            DetailFragment detailFragment = DetailFragment.newInstance(itemId);
+            // Pass your data to the fragment before committing the transaction
+            detailFragment.saveData("SongName", "AlbumName", "123");
+            Log.d("MainActivity", "Clicked on shit in landscape mode");
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container_detail, detailFragment)
+                    .commit();
+        } else {
+            // In portrait mode, start the DetailActivity
+            Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+            intent.putExtra("itemId", itemId);
+            Log.d("MainActivity", "Clicked on shit in Portrait mode");
+
+            startActivity(intent);
+        }
     }
+
 }
