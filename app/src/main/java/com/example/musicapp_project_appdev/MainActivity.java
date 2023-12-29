@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity  implements MasterFragment.O
     String s_songName, s_songAlbum, s_songDuration = "";
     CustomAdapter customAdapter;
     BottomNavigationView navBar;
-    DetailFragment detailFragment;
+    DetailFragment detailFragment = new DetailFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,23 +161,34 @@ public class MainActivity extends AppCompatActivity  implements MasterFragment.O
                 int Id = itemId - 1;
                 Cursor cursor = db.readDataFromDataBaseById(String.valueOf(itemId));
 
-                if (cursor != null && cursor.moveToFirst()) {
-                    s_songName = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_NAME));
-                    s_songAlbum = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_ALBUM));
-                    s_songDuration = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_DURATION));
+                if (cursor != null) {
+                    Log.d("MainActivity", "Cursor count: " + cursor.getCount());
 
-                    // Check if any of the data is null before passing to displayDetails
-                    if (s_songName != null && s_songAlbum != null && s_songDuration != null) {
-                        detailFragment.displayDetails(s_songName, s_songAlbum, s_songDuration);
+                    if (cursor.moveToFirst()) {
+                        s_songName = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_NAME));
+                        s_songAlbum = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_ALBUM));
+                        s_songDuration = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_DURATION));
 
+                        Log.d("MainActivity", "Details: " + s_songName + ", " + s_songAlbum + ", " + s_songDuration);
+
+                        // Check if any of the data is null before passing to displayDetails
+                        if (s_songName != null && s_songAlbum != null && s_songDuration != null) {
+                            detailFragment.displayDetails(s_songName, s_songAlbum, s_songDuration);
+                        } else {
+                            Log.e("MainActivity", "One or more retrieved values are null");
+                        }
+                    } else {
+                        Log.e("MainActivity", "Cursor moveToFirst failed. Cursor is empty.");
                     }
 
-                    Log.d("DetailActivity", "Details: " + s_songName + ", " + s_songAlbum + ", " + s_songDuration + ", " + Id + ", " + itemId);
                     cursor.close();
+                } else {
+                    Log.e("MainActivity", "Cursor is null");
                 }
+
             } else {
                 // Handle the case where detailFragment is null
-                Log.e("DetailActivity", "detailFragment is null");
+                Log.e("MainActivity", "detailFragment is null");
             }
         } else {
             // In portrait mode, start the DetailActivity

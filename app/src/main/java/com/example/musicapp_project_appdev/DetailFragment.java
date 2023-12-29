@@ -37,13 +37,27 @@ public class DetailFragment extends Fragment {
         textViewAlbum = view.findViewById(R.id.textViewAlbum);
         textViewDuration = view.findViewById(R.id.textViewDuration);
 
-
         // Check for arguments and display details
         Bundle args = getArguments();
         if (args != null) {
             int itemId = args.getInt("itemId", -1);
             if (itemId != -1) {
-                displayDetails(song, album, duration);
+                // Fetch details from the database or wherever you get them
+                db = new MusicDatabase(getActivity());
+                Cursor cursor = db.readDataFromDataBaseById(String.valueOf(itemId));
+                if (cursor != null && cursor.moveToFirst()) {
+                    song = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_NAME));
+                    album = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_ALBUM));
+                    duration = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_DURATION));
+
+                    // Call displayDetails with the fetched details
+                    displayDetails(song, album, duration);
+
+                    // Log the details
+                    Log.d("DetailFragment", "Details: " + song + ", " + album + ", " + duration);
+                    // Close the cursor
+                    cursor.close();
+                }
             }
         }
 

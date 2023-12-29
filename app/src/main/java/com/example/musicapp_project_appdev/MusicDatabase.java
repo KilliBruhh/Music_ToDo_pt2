@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -72,6 +73,19 @@ public class MusicDatabase extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = ?";
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(query, new String[]{rowId});
+    }
+
+    public Cursor readDataFromDataBaseByIdForLand(String itemId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME +" WHERE " + COLUMN_ID + " = ?";
+        String[] selectionArgs = {itemId};
+        Log.d("MusicDatabase", "Executing query: " + query);
+        try {
+            return db.rawQuery(query, selectionArgs);
+        } catch (Exception e) {
+            Log.e("MusicDatabase", "Error executing query: " + e.getMessage());
+            return null;
+        }
     }
 
     void updateData(String rowId, String name, String album, String duration){
