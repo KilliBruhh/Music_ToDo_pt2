@@ -43,13 +43,21 @@
     <string name="englishButton">English</string>
     <string name="dutchButton">Dutch</string>
 
-    <string name="listTitle">Your SOngs to Listen to!</string>
+    <string name="listTitle">Your Songs to Listen to!</string>
     <string name="detailPageInfo">Information about the Song!</string>
-    <string name="select_song">Selecteer een Nummber:</string>
+    <string name="select_song">Select a Number:</string>
 
     <string name="name_label">Select Song:</string>
     <string name="album_label">Select Album:</string>
     <string name="duration_song">Select Duration:</string>
+
+    <string name="editButton">Edit</string>
+    <string name="snackbarNoData">Not Song Selected</string>
+
+    <string name="name_selected">Name: </string>
+    <string name="album_selected">Album: </string>
+    <string name="duration_selected">Duration: </string>
+
 
 
 

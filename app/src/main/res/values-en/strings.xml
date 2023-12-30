@@ -52,5 +52,11 @@
     <string name="name_label">Select Song:</string>
     <string name="album_label">Select Album:</string>
     <string name="duration_song">Select Duration:</string>
+    <string name="editButton">Edit</string>
+    <string name="snackbarNoData">Not Song Selected</string>
+
+    <string name="name_selected">Name: </string>
+    <string name="album_selected">Album: </string>
+    <string name="duration_selected">Duration: </string>
 
 </resources>
