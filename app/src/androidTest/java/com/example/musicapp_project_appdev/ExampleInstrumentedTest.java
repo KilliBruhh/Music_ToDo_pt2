@@ -9,16 +9,32 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import android.content.pm.ActivityInfo;
+
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 
 
+import static androidx.test.espresso.Espresso.onData;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.anything;
 
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
@@ -32,15 +48,28 @@ public class ExampleInstrumentedTest {
         assertEquals("com.example.musicapp_project_appdev", appContext.getPackageName());
     }
     */
-
+    @Rule
+    public ActivityScenarioRule<MainActivity> activityScenarioRule =
+            new ActivityScenarioRule<>(MainActivity.class);
+    @Before
+    public void setUp() {
+        // Set the initial orientation to portrait before each test
+        activityScenarioRule.getScenario().onActivity(activity ->
+                activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT));
+    }
 
     // TEst navigation form main to side activities
     @Test
     public void testSettingsActivity() {
         ActivityScenario mainActivityScenario = ActivityScenario.launch(MainActivity.class);
-        onView(withId(R.id.goSettings)).perform(click());
-        // Check if Settings activity is now viewable
-        onView(withId(R.id.backgroundId)).check(matches(isDisplayed()));
+        onView(withId(R.id.goAddSong)).perform(click());
+
+        onView(withId(R.id.songName)).perform(replaceText("Test Song"));
+        onView(withId(R.id.AlbumName)).perform(replaceText("Test Album"));
+        onView(withId(R.id.durationSong)).perform(replaceText("111")).perform(closeSoftKeyboard());
+
+        onView(withId(R.id.addSongButton)).perform(click());
+
     }
     @Test
     public void testAddMusicActivity() {
@@ -60,7 +89,6 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.durationSong)).perform(replaceText("111")).perform(closeSoftKeyboard());
 
         onView(withId(R.id.addSongButton)).perform(click());
-
     }
 
     // Test when u want to edit the editText fields are not empty
@@ -76,13 +104,15 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.AlbumName)).perform(replaceText("Test Edit Album"));
         onView(withId(R.id.durationSong)).perform(replaceText("222")).perform(closeSoftKeyboard());
         // Confirming deletion
-        onView(withId(R.id.EditSongButton)).perform(click());
+        onView(withText("Test Song")).check(matches(isDisplayed()));
+
     }
 
     // Test Delete
     @Test
     public void testDeleteSong() {
-        ActivityScenario mainActivityScenario = ActivityScenario.launch(DetailActivity.class);
+        ActivityScenario mainActivityScenario = ActivityScenario.launch(MainActivity.class);
+        onView(withId(R.id.listView)).perform(click());
 
         onView(withId(R.id.GoEditButton)).perform(click());
 

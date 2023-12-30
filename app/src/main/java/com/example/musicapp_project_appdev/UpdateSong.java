@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -88,6 +89,7 @@ public class UpdateSong extends AppCompatActivity {
             name = getIntent().getStringExtra("name");
             album = getIntent().getStringExtra("album");
             duration = getIntent().getStringExtra("duration");
+            Log.d("UpdateSongActivity", name + " " + id + " " + album+ " " + duration );
 
             // add data to textfields
             songName.setText(name);
