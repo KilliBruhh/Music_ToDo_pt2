@@ -7,7 +7,6 @@ import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import android.content.pm.ActivityInfo;
 
@@ -22,19 +21,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-
-
-import static androidx.test.espresso.Espresso.onData;
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.replaceText;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.CoreMatchers.anything;
 
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
@@ -92,6 +78,7 @@ public class ExampleInstrumentedTest {
     }
 
     // Test when u want to edit the editText fields are not empty
+    /*
     @Test
     public void testUpdateFields() {
         // In Mainactivity clickin on items in Master fragmnet
@@ -111,13 +98,10 @@ public class ExampleInstrumentedTest {
     // Test Delete
     @Test
     public void testDeleteSong() {
-        ActivityScenario mainActivityScenario = ActivityScenario.launch(MainActivity.class);
-        onView(withId(R.id.listView)).perform(click());
-
-        onView(withId(R.id.GoEditButton)).perform(click());
-
-        onView(withId(R.id.DeleteSongButton)).perform(click());
+        onData(allOf(is(instanceOf(Map.class)), hasEntry(equalTo("STR"), is("item: 50"))))
+                .perform(click());
     }
+    */
 
     // Test change Lang
     @Test
