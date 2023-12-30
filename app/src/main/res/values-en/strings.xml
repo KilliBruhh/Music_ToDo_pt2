@@ -52,5 +52,6 @@
     <string name="name_label">Select Song:</string>
     <string name="album_label">Select Album:</string>
     <string name="duration_song">Select Duration:</string>
+    <string name="editButton">Edit</string>
 
 </resources>

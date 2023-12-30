@@ -1,5 +1,6 @@
 package com.example.musicapp_project_appdev;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -22,12 +24,13 @@ public class DetailFragment extends Fragment {
     private TextView V_textViewAlbum;
     private TextView V_textViewDuration;
     private TextView rand;
+    private Button editButton;
 
 
     private static final String KEY_SONG = "select_song";
 
 
-    public String song, album, duration;
+    public String song, album, duration, id;
     MusicDatabase db;
 
     public DetailFragment() {
@@ -38,6 +41,9 @@ public class DetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d("DetailFragment", "onCreateView");
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
+
+        // Initialize Button
+        editButton = (Button) view.findViewById(R.id.OnEditButton);
 
         // Initialize TextViews
         V_textViewSongName = (TextView)  view.findViewById(R.id.textViewSongName);
@@ -55,6 +61,7 @@ public class DetailFragment extends Fragment {
                 db = new MusicDatabase(getActivity());
                 Cursor cursor = db.readDataFromDataBaseById(String.valueOf(itemId));
                 if (cursor != null && cursor.moveToFirst()) {
+                    id = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_ID));
                     song = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_NAME));
                     album = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_ALBUM));
                     duration = cursor.getString(cursor.getColumnIndexOrThrow(MusicDatabase.COLUMN_DURATION));
@@ -70,6 +77,18 @@ public class DetailFragment extends Fragment {
                 }
             }
         }
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), UpdateSong.class);
+                intent.putExtra("id", id);
+                intent.putExtra("name", song);
+                intent.putExtra("album", album);
+                intent.putExtra("duration", duration);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

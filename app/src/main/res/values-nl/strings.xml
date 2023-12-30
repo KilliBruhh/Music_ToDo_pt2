@@ -49,4 +49,6 @@
     <string name="name_label">Selecteer De Naam:</string>
     <string name="album_label">Selecteer Album:</string>
     <string name="duration_song">Selecteer De Duur:</string>
+    <string name="editButton">Aanpassen</string>
+
 </resources>
