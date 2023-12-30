@@ -2,6 +2,7 @@ package com.example.musicapp_project_appdev;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import androidx.appcompat.widget.Toolbar;
 
 public class AddMusic extends AppCompatActivity {
 
@@ -24,6 +27,12 @@ public class AddMusic extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_music);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(null); // Clear the default title
+        TextView toolbarTitle = findViewById(R.id.toolbar_title);
+        toolbarTitle.setText(getString(R.string.toolbarTitleAdd));
 
         songName = findViewById(R.id.songName);
         albumName = findViewById(R.id.AlbumName);
@@ -90,5 +99,9 @@ public class AddMusic extends AppCompatActivity {
             }
         });
         */
+    }
+
+    public void onBackButtonClick(View view) {
+        onBackPressed();
     }
 }

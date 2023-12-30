@@ -56,4 +56,8 @@
     <string name="album_selected">Album: </string>
     <string name="duration_selected">Duur: </string>
 
+    <string name="toolbarTitleAdd">Add New Song</string>
+    <string name="back_button_description">Terug Knop</string>
+
+
 </resources>
