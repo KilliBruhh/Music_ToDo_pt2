@@ -4,34 +4,25 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
-import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-import android.app.Activity;
-import android.content.Context;
-
 import androidx.test.core.app.ActivityScenario;
-import androidx.test.espresso.action.ViewActions;
-import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.*;
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
+
+
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
+
 
     /*
     @Test
@@ -75,24 +66,46 @@ public class ExampleInstrumentedTest {
     // Test when u want to edit the editText fields are not empty
     @Test
     public void testUpdateFields() {
+        // In Mainactivity clickin on items in Master fragmnet
         ActivityScenario mainActivityScenario = ActivityScenario.launch(MainActivity.class);
-
-        onView(withId(R.id.editButton)).perform(click());
-
-        onView(withId(R.id.EditSongName)).check(matches(withText("Test Song")));
-        onView(withId(R.id.EditAlbumSong)).check(matches(withText("Test Album")));
-        onView(withId(R.id.EditDurationSong)).check(matches(withText("111"))).perform(closeSoftKeyboard());
-
+        onView(withId(R.id.listView)).perform(click());
+        // In Detail Activity
+        onView(withId(R.id.GoEditButton)).perform(click());
+        // in Edit Activity
+        onView(withId(R.id.songName)).perform(replaceText("Test Edit Song"));
+        onView(withId(R.id.AlbumName)).perform(replaceText("Test Edit Album"));
+        onView(withId(R.id.durationSong)).perform(replaceText("222")).perform(closeSoftKeyboard());
+        // Confirming deletion
         onView(withId(R.id.EditSongButton)).perform(click());
     }
 
     // Test Delete
     @Test
     public void testDeleteSong() {
-        ActivityScenario mainActivityScenario = ActivityScenario.launch(MainActivity.class);
+        ActivityScenario mainActivityScenario = ActivityScenario.launch(DetailActivity.class);
 
-        onView(withId(R.id.editButton)).perform(click());
+        onView(withId(R.id.GoEditButton)).perform(click());
 
         onView(withId(R.id.DeleteSongButton)).perform(click());
     }
+
+    // Test change Lang
+    @Test
+    public void testLangChange() {
+        ActivityScenario mainActivityScenario = ActivityScenario.launch(Settings.class);
+        onView(withId(R.id.dutchButton)).perform(click());
+        // Check if the greeting message is displayed correctly in the new language
+        Espresso.onView(ViewMatchers.withId(R.id.settingsKop))
+                .check(ViewAssertions.matches(ViewMatchers.withText(R.string.settingsKop)));
+
+    }
+    // Test Change Theme
+    @Test
+    public void testThemeChange() {
+        ActivityScenario mainActivityScenario = ActivityScenario.launch(Settings.class);
+        onView(withId(R.id.darkButton)).perform(click());
+        Espresso.onView(ViewMatchers.withId(R.id.taalTextview))
+                .check(ViewAssertions.matches(ViewMatchers.hasTextColor(R.color.textColorDarkMode)));
+    }
+
 }
