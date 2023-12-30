@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import org.w3c.dom.Text;
 
 
@@ -31,6 +33,7 @@ public class DetailFragment extends Fragment {
 
 
     public String song, album, duration, id;
+    public String L_song, L_album, L_duration;
     MusicDatabase db;
 
     public DetailFragment() {
@@ -86,7 +89,12 @@ public class DetailFragment extends Fragment {
                 intent.putExtra("name", song);
                 intent.putExtra("album", album);
                 intent.putExtra("duration", duration);
-                startActivity(intent);
+                if (id != null && song != null && album != null && duration != null) {
+                    startActivity(intent);
+                } else {
+                    String snackbarNoDataString = getString(R.string.snackbarNoData);
+                    Snackbar.make(view, snackbarNoDataString, Snackbar.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -108,12 +116,17 @@ public class DetailFragment extends Fragment {
         song = songName;
         album = songAlbum;
         duration = songDuration;
+
+        L_song = getString(R.string.name_selected);
+        L_album = getString(R.string.album_selected);
+        L_duration = getString(R.string.duration_selected);
+
         setText(song);
 
         if (V_textViewSongName != null && V_textViewAlbum != null && V_textViewDuration != null) {
-            V_textViewSongName.setText("Song Name: " + song);
-            V_textViewAlbum.setText("Album: " + album);
-            V_textViewDuration.setText("Duration: " + duration);
+            V_textViewSongName.setText(L_song+ " " + song);
+            V_textViewAlbum.setText(L_album+ " " + album);
+            V_textViewDuration.setText(L_duration+ " " + duration);
         } else {
             Log.e("DetailFragment", "TextViews are null");
         }

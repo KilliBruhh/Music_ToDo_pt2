@@ -50,5 +50,10 @@
     <string name="album_label">Selecteer Album:</string>
     <string name="duration_song">Selecteer De Duur:</string>
     <string name="editButton">Aanpassen</string>
+    <string name="snackbarNoData">Geen Nummer Geselecteerd</string>
+
+    <string name="name_selected">Naam: </string>
+    <string name="album_selected">Album: </string>
+    <string name="duration_selected">Duur: </string>
 
 </resources>
