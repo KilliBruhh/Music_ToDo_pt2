@@ -85,7 +85,8 @@ public class DetailFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), UpdateSong.class);
-                intent.putExtra("id", id);
+                int tempId = Integer.parseInt(id);
+                intent.putExtra("id", tempId);
                 intent.putExtra("name", song);
                 intent.putExtra("album", album);
                 intent.putExtra("duration", duration);
