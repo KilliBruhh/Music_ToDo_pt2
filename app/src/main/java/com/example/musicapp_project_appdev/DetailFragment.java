@@ -84,8 +84,8 @@ public class DetailFragment extends Fragment {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), UpdateSong.class);
                 int tempId = Integer.parseInt(id);
+                Intent intent = new Intent(getActivity(), UpdateSong.class);
                 intent.putExtra("id", tempId);
                 intent.putExtra("name", song);
                 intent.putExtra("album", album);
